@@ -34,7 +34,7 @@
 	<developers>
 		<developer>
 			<id>haesleinhuepf</id>
-			<name>Robert Haase`</name>
+			<name>Robert Haase</name>
 			<url>http://haesleinhuepf.net</url>
 			<organization>PoL TUD</organization>
 			<roles>
@@ -54,11 +54,11 @@
 		<connection>scm:git:git://github.com/clij/clij3</connection>
         <developerConnection>scm:git:git@github.com/clij/clij3</developerConnection>
         <tag>HEAD</tag>
-		<url>https://github.com/clij/clij3</url>
+		<url>https://github.com/clesperanto/clij3</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/clij/clij3/issues</url>
+		<url>https://github.com/clesperanto/clij3/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>None</system>
@@ -67,7 +67,7 @@
 	<properties>
 		<package-name>net.clesperanto</package-name>
 		<license.licenseName>bsd_3</license.licenseName>
-		<license.copyrightOwners>Robert Haase, TU Dresden</license.copyrightOwners>
+		<license.copyrightOwners>Robert Haase, Stéphane Rigaud, Institut Pasteur Paris, DFG Cluster of Excellence "Physice of Life" TU Dresden</license.copyrightOwners>
 		<scijava.app.directory>C:/programs/fiji-win64/Fiji.app/</scijava.app.directory>
 		<!--<scijava.app.directory>/home/rhaase/programs/fiji/Fiji.app/</scijava.app.directory>
 		<scijava.app.directory>/Applications/Fiji.app/</scijava.app.directory>-->
