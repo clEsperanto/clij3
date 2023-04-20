@@ -16,9 +16,7 @@ public class YetAnotherPlayground {
         imp.show();
 
         CLIJ3 cle = CLIJ3.getInstance();
-        BufferJ blurred = cle.add_image_and_scalar(imp, null, 3);
+        BufferJ blurred = cle.add_image_and_scalar(imp, null, 1000);
         cle.imshow(blurred);
-
-        IJ.run("3-3-2 RGB");
     }
 }
