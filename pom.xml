@@ -6,9 +6,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>net.haesleinhuepf</groupId>
-		<artifactId>clij-parent-pom</artifactId>
-		<version>2.2.0.14</version>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>34.1.0</version>
 		<relativePath />
 	</parent>
 
@@ -17,12 +17,12 @@
 	<version>0.0.0.1</version>
 
 	<name>clij3</name>
-	<description>clij</description>
+	<description>clij3</description>
 	<url>http://clesperanto.net</url>
 	<inceptionYear>2023</inceptionYear>
 	<organization>
-    <name>PoL, TU Dresden</name>
-		<url>http://www.tu-dresden.de</url>
+    <name>clesperanto</name>
+		<url>http://clesperanto.net</url>
 	</organization>
 	<licenses>
 		<license>
@@ -43,7 +43,13 @@
 		</developer>
 	</developers>
 
-  <mailingLists>
+	<contributors>
+		<contributor>
+			<name>none</name>
+		</contributor>
+	</contributors>
+
+    <mailingLists>
 		<mailingList>
 			<name>ImageSc Forum</name>
 			<archive>http://forum.image.sc/</archive>
@@ -51,8 +57,8 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:git://github.com/clij/clij3</connection>
-        <developerConnection>scm:git:git@github.com/clij/clij3</developerConnection>
+		<connection>scm:git:git://github.com/clesperanto/clij3</connection>
+        <developerConnection>scm:git:git@github.com/clesperanto/clij3</developerConnection>
         <tag>HEAD</tag>
 		<url>https://github.com/clesperanto/clij3</url>
 	</scm>
@@ -80,6 +86,20 @@
 			<groupId>net.imagej</groupId>
 			<artifactId>imagej</artifactId>
 		</dependency>
+
+		<!-- ImageJ dependencies -->
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-legacy</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>
@@ -92,26 +112,11 @@
 			<artifactId>javacpp</artifactId>
 			<version>1.5.8</version>
 		</dependency>
-		
-			<dependency>
-			<groupId>net.haesleinhuepf</groupId>
-			<artifactId>clij_</artifactId>
-     	</dependency>
-		
+
 		<dependency>
-			<groupId>net.haesleinhuepf</groupId>
-			<artifactId>clij-clearcl</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>net.haesleinhuepf</groupId>
-			<artifactId>clij2_</artifactId>
-		</dependency>
-		
-		<dependency>
-	<groupId>net.clesperanto</groupId>
-	<artifactId>clesperantoj_</artifactId>
-	<version>0.0.0.1</version>
+			<groupId>net.clesperanto</groupId>
+			<artifactId>clesperantoj_</artifactId>
+			<version>0.0.0.1</version>
 		</dependency>
 
 	</dependencies>
