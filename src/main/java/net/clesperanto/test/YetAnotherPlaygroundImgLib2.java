@@ -15,7 +15,7 @@ public class YetAnotherPlaygroundImgLib2 {
     public static void main(String[] args) throws Exception {
         ij.launch(args);
 
-        Dataset dataset = (Dataset) ij.io().open("./imgs/boats.tif");
+        Dataset dataset = (Dataset) ij.io().open("./demo/boats.tif");
 
         Img<FloatType> img = ij.op().convert().float32((Img)dataset);
         ij.ui().show("input", img);

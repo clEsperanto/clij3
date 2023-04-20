@@ -11,7 +11,7 @@ public class YetAnotherPlayground {
 
         new ImageJ();
 
-        ImagePlus imp = IJ.openImage("./imgs/blobs.tif");
+        ImagePlus imp = IJ.openImage("./demo/blobs.tif");
         IJ.run(imp, "32-bit", "");
         imp.show();
 
