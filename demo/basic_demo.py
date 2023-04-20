@@ -9,7 +9,7 @@ imp.show()
 
 gpu_image = cle.push(imp)
 
-gpu_result = cle.add_image_and_scalar(gpu_image, None, 1000)
+gpu_result = cle.gaussian_blur(gpu_image, None, 5, 5, 5)
 
 imp_res = cle.pull(gpu_result)
 imp_res.show()
