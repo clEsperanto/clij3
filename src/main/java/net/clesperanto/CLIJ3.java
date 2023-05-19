@@ -94,6 +94,8 @@ public class CLIJ3 {
         return create_like(sourceJ);
     }
 
+    // GENERATOR //
+
     public BufferJ add_image_and_scalar(Object source, Object target, float scalar) {
         BufferJ sourceJ = push(source);
         BufferJ targetJ = create_like_if_none(sourceJ, target);
@@ -116,5 +118,5 @@ public class CLIJ3 {
         return targetJ;
     }
 
-
+    // GENERATOR //
 }
