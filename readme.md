@@ -2,6 +2,8 @@
 
 This is under construction. Anyway...
 
+![img.png](demo/screenshot.png)
+
 ## Installation instructions
 
 Download, build, and run `mvn install` from [clesperantoj-prototype](https://github.com/clEsperanto/clesperantoj_prototype).

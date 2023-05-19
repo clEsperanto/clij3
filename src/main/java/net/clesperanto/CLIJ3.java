@@ -101,4 +101,11 @@ public class CLIJ3 {
 
         return targetJ;
     }
+
+    public BufferJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
+        BufferJ sourceJ = push(source);
+        BufferJ targetJ = create_like_if_none(sourceJ, target);
+        Tier1.gaussianBlur(processor, sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
+        return targetJ;
+    }
 }
