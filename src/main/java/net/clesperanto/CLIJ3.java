@@ -108,4 +108,13 @@ public class CLIJ3 {
         Tier1.gaussianBlur(processor, sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
         return targetJ;
     }
+
+    public BufferJ mean_box(Object source, Object target, int radius_x, int radius_y, int radius_z) {
+        BufferJ sourceJ = push(source);
+        BufferJ targetJ = create_like_if_none(sourceJ, target);
+        Tier1.meanBox(processor, sourceJ, targetJ, radius_x, radius_y, radius_z);
+        return targetJ;
+    }
+
+
 }
