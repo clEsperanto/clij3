@@ -10,9 +10,17 @@ imp.show()
 gpu_image = cle.push(imp)
 
 gpu_result = cle.gaussian_blur(gpu_image, None, 5, 5, 5)
+cle.imshow(gpu_result)
 
-imp_res = cle.pull(gpu_result)
-imp_res.show()
+
+binary = cle.threshold_otsu(imp, None)
+cle.imshow(binary)
+
+
+
+segmentation = cle.voronoi_otsu_labeling(imp, None, 3, 1)
+cle.imshow(segmentation)
+
 
 
 

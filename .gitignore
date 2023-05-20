@@ -58,3 +58,4 @@ __pycache__/
 python/dist
 python/lib
 
+*/.ipynb_checkpoints/*
