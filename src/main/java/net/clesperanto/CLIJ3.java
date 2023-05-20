@@ -87,7 +87,45 @@ public class CLIJ3 {
 
 
     public BufferJ create_like(BufferJ source) {
+        // Todo: This should have the same pixel type as the source
         return MemoryJ.makeFloatBuffer(this.processor, source.getWidth(), source.getHeight(), source.getDepth(), "buffer");
+    }
+
+    public BufferJ create_labels_like(BufferJ source) {
+        // Todo: this should be uint32
+        return MemoryJ.makeFloatBuffer(this.processor, source.getWidth(), source.getHeight(), source.getDepth(), "buffer");
+    }
+
+    public BufferJ create_binary_like(BufferJ source) {
+        // Todo: this should be uint8
+        return MemoryJ.makeFloatBuffer(this.processor, source.getWidth(), source.getHeight(), source.getDepth(), "buffer");
+    }
+
+    public BufferJ create_2d_yz_like(BufferJ source) {
+        // Todo: This should have the same pixel type as the source
+        if (source.getDimension() == 3 && source.getDepth() > 1) {
+            return MemoryJ.makeFloatBuffer(this.processor, source.getDepth(), source.getHeight(), 1, "buffer");
+        } else {
+            return MemoryJ.makeFloatBuffer(this.processor, 1, source.getHeight(), 1, "buffer");
+        }
+    }
+
+    public BufferJ create_2d_zx_like(BufferJ source) {
+        // Todo: This should have the same pixel type as the source
+        if (source.getDimension() == 3 && source.getDepth() > 1) {
+            return MemoryJ.makeFloatBuffer(this.processor, source.getDepth(), source.getWidth(), 1, "buffer");
+        } else {
+            return MemoryJ.makeFloatBuffer(this.processor, 1, source.getWidth(), 1, "buffer");
+        }
+    }
+
+    public BufferJ create_2d_yx_like(BufferJ source) {
+        // Todo: This should have the same pixel type as the source
+        if (source.getDimension() == 3 && source.getDepth() > 1) {
+            return MemoryJ.makeFloatBuffer(this.processor, source.getHeight(), source.getWidth(), 1, "buffer");
+        } else {
+            return MemoryJ.makeFloatBuffer(this.processor, 1, source.getWidth(), 1, "buffer");
+        }
     }
 
     private BufferJ create_like_if_none(Object source, Object target) {
@@ -98,6 +136,61 @@ public class CLIJ3 {
         }
         return create_like(sourceJ);
     }
+
+    private BufferJ create_labels_like_if_none(Object source, Object target) {
+        BufferJ sourceJ = push(source); // that might be not necessary and slow
+        BufferJ targetJ = push(target); // that might be not necessary and slow
+        if (targetJ != null) {
+            return targetJ;
+        }
+        return create_labels_like(sourceJ);
+    }
+
+    private BufferJ create_binary_like_if_none(Object source, Object target) {
+        BufferJ sourceJ = push(source); // that might be not necessary and slow
+        BufferJ targetJ = push(target); // that might be not necessary and slow
+        if (targetJ != null) {
+            return targetJ;
+        }
+        return create_binary_like(sourceJ);
+    }
+
+    private BufferJ create_2d_yz_like_if_none(Object source, Object target) {
+        BufferJ sourceJ = push(source); // that might be not necessary and slow
+        BufferJ targetJ = push(target); // that might be not necessary and slow
+        if (targetJ != null) {
+            return targetJ;
+        }
+        return create_2d_yz_like(sourceJ);
+    }
+
+    private BufferJ create_2d_zx_like_if_none(Object source, Object target) {
+        BufferJ sourceJ = push(source); // that might be not necessary and slow
+        BufferJ targetJ = push(target); // that might be not necessary and slow
+        if (targetJ != null) {
+            return targetJ;
+        }
+        return create_2d_zx_like(sourceJ);
+    }
+
+    private BufferJ create_2d_yx_like_if_none(Object source, Object target) {
+        BufferJ sourceJ = push(source); // that might be not necessary and slow
+        BufferJ targetJ = push(target); // that might be not necessary and slow
+        if (targetJ != null) {
+            return targetJ;
+        }
+        return create_2d_yx_like(sourceJ);
+    }
+
+
+
+
+
+
+
+
+
+
 
     // GENERATOR //
     public BufferJ absolute(Object src, Object dst) {
