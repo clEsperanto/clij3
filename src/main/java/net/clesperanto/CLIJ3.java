@@ -221,7 +221,7 @@ public class CLIJ3 {
     public BufferJ binary_and(Object src1, Object src2, Object dst) {
         BufferJ src1J = push(src1);
         BufferJ src2J = push(src2);
-        BufferJ dstJ = create_like_if_none(src1J, dst);
+        BufferJ dstJ = create_binary_like_if_none(src1J, dst);
         Tier1.binaryAnd(processor, src1J, src2J, dstJ);
         return dstJ;
     }
@@ -229,7 +229,7 @@ public class CLIJ3 {
     
     public BufferJ binary_edge_detection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_binary_like_if_none(srcJ, dst);
         Tier1.binaryEdgeDetection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -237,7 +237,7 @@ public class CLIJ3 {
     
     public BufferJ binary_not(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_binary_like_if_none(srcJ, dst);
         Tier1.binaryNot(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -246,7 +246,7 @@ public class CLIJ3 {
     public BufferJ binary_or(Object src1, Object src2, Object dst) {
         BufferJ src1J = push(src1);
         BufferJ src2J = push(src2);
-        BufferJ dstJ = create_like_if_none(src1J, dst);
+        BufferJ dstJ = create_binary_like_if_none(src1J, dst);
         Tier1.binaryOr(processor, src1J, src2J, dstJ);
         return dstJ;
     }
@@ -255,7 +255,7 @@ public class CLIJ3 {
     public BufferJ binary_subtract(Object src1, Object src2, Object dst) {
         BufferJ src1J = push(src1);
         BufferJ src2J = push(src2);
-        BufferJ dstJ = create_like_if_none(src1J, dst);
+        BufferJ dstJ = create_binary_like_if_none(src1J, dst);
         Tier1.binarySubtract(processor, src1J, src2J, dstJ);
         return dstJ;
     }
@@ -264,7 +264,7 @@ public class CLIJ3 {
     public BufferJ binary_xor(Object src1, Object src2, Object dst) {
         BufferJ src1J = push(src1);
         BufferJ src2J = push(src2);
-        BufferJ dstJ = create_like_if_none(src1J, dst);
+        BufferJ dstJ = create_binary_like_if_none(src1J, dst);
         Tier1.binaryXor(processor, src1J, src2J, dstJ);
         return dstJ;
     }
@@ -496,7 +496,7 @@ public class CLIJ3 {
     
     public BufferJ maximum_x_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_yz_like_if_none(srcJ, dst);
         Tier1.maximumXProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -504,7 +504,7 @@ public class CLIJ3 {
     
     public BufferJ maximum_y_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_zx_like_if_none(srcJ, dst);
         Tier1.maximumYProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -512,7 +512,7 @@ public class CLIJ3 {
     
     public BufferJ maximum_z_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_yx_like_if_none(srcJ, dst);
         Tier1.maximumZProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -561,7 +561,7 @@ public class CLIJ3 {
     
     public BufferJ minimum_x_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_yz_like_if_none(srcJ, dst);
         Tier1.minimumXProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -569,7 +569,7 @@ public class CLIJ3 {
     
     public BufferJ minimum_y_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_zx_like_if_none(srcJ, dst);
         Tier1.minimumYProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -577,7 +577,7 @@ public class CLIJ3 {
     
     public BufferJ minimum_z_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_yx_like_if_none(srcJ, dst);
         Tier1.minimumZProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -760,7 +760,7 @@ public class CLIJ3 {
     
     public BufferJ sum_x_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_yz_like_if_none(srcJ, dst);
         Tier1.sumXProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -768,7 +768,7 @@ public class CLIJ3 {
     
     public BufferJ sum_y_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_zx_like_if_none(srcJ, dst);
         Tier1.sumYProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -776,7 +776,7 @@ public class CLIJ3 {
     
     public BufferJ sum_z_projection(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_2d_yx_like_if_none(srcJ, dst);
         Tier1.sumZProjection(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -785,7 +785,7 @@ public class CLIJ3 {
 
     public BufferJ dilate_labels(Object src, Object dst, float radius) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_labels_like_if_none(srcJ, dst);
         Tier2.dilateLabels(processor, srcJ, dstJ, radius);
         return dstJ;
     }
@@ -859,7 +859,7 @@ public class CLIJ3 {
 
     public BufferJ connected_component_labeling_box(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_labels_like_if_none(srcJ, dst);
         Tier4.connectedComponentLabelingBox(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -867,7 +867,7 @@ public class CLIJ3 {
     
     public BufferJ threshold_otsu(Object src, Object dst) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_binary_like_if_none(srcJ, dst);
         Tier4.thresholdOtsu(processor, srcJ, dstJ);
         return dstJ;
     }
@@ -877,7 +877,7 @@ public class CLIJ3 {
     public BufferJ masked_voronoi_labeling(Object src, Object dst, Object mask) {
         BufferJ srcJ = push(src);
         BufferJ dstJ = push(dst);
-        BufferJ maskJ = create_like_if_none(srcJ, mask);
+        BufferJ maskJ = create_labels_like_if_none(srcJ, mask);
         Tier5.maskedVoronoiLabeling(processor, srcJ, dstJ, maskJ);
         return maskJ;
     }
@@ -886,7 +886,7 @@ public class CLIJ3 {
 
     public BufferJ voronoi_otsu_labeling(Object src, Object dst, float sigma1, float sigma2) {
         BufferJ srcJ = push(src);
-        BufferJ dstJ = create_like_if_none(srcJ, dst);
+        BufferJ dstJ = create_labels_like_if_none(srcJ, dst);
         Tier6.voronoiOtsuLabeling(processor, srcJ, dstJ, sigma1, sigma2);
         return dstJ;
     }
