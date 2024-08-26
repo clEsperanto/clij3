@@ -64,7 +64,7 @@ public class CLIJ3 {
         synchronized (this) {
             // if source is an ImagePlus and targetClass is ArrayJ
             if (source instanceof ImagePlus && targetClass == ArrayJ.class) {
-                return (T) ImageJConverters.copyImgLib2ToArrayJ((ImagePlus) source, device, "buffer");
+                return (T) ImageJConverters.copyImagePlus2ToArrayJ((ImagePlus) source, device, "buffer");
             }
             // if source is an ImgLib2 Img<> and targetClass is ArrayJ
             if (source instanceof RandomAccessibleInterval && targetClass == ArrayJ.class) {
@@ -72,7 +72,7 @@ public class CLIJ3 {
             }
             // if source is an ArrayJ and targetClass is ImagePlus
             if (source instanceof ArrayJ && targetClass == ImagePlus.class) {
-                return (T) ImageJConverters.copyArrayJToImgLib2((ArrayJ) source);
+                return (T) ImageJConverters.copyArrayJToImagePlus((ArrayJ) source);
             }
             if (source instanceof ArrayJ && targetClass == RandomAccessibleInterval.class) {
                 return (T) ImgLib2Converters.copyArrayJToImgLib2((ArrayJ) source);
@@ -144,6 +144,8 @@ public class CLIJ3 {
         String data_type = bit_depth_map.get(source.getBitDepth());
         return this.create(source.getWidth(), source.getHeight(), source.getNSlices(), data_type);
     }
+
+    /* FUNCTIONS */
 
     public ArrayJ add_image_and_scalar(Object source, Object target, float scalar) {
         return Tier1.addImageAndScalar(device, push(source), (ArrayJ) target, scalar);
