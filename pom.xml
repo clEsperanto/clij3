@@ -14,7 +14,7 @@
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clij3_</artifactId>
-	<version>0.0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<name>clij3</name>
 	<description>clij3</description>
@@ -38,7 +38,6 @@
 			<url>http://haesleinhuepf.net</url>
 			<organization>ScaDS.AI</organization>
 			<roles>
-				<role>creator</role>
 				<role>developer</role>
 				<role>maintainer</role>
 			</roles>
@@ -50,7 +49,6 @@
 			<url>https://research.pasteur.fr/en/member/stephane-rigaud/</url>
 			<organization>Institut Pasteur</organization>
 			<roles>
-				<role>creator</role>
 				<role>developer</role>
 				<role>maintainer</role>
 			</roles>
@@ -123,10 +121,17 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- add imglib2 dependecy -->
+		<dependency>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2</artifactId>
+			<version>7.0.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>net.clesperanto</groupId>
-			<artifactId>clesperantoj_</artifactId>
-			<version>0.0.0.1</version>
+			<artifactId>clesperantoj</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
