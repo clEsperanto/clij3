@@ -21,11 +21,11 @@ public class YetAnotherPlaygroundImgLib2 {
         Img<FloatType> img = ij.op().convert().float32((Img) dataset);
         ij.ui().show("input", img);
 
-        // CLIJ3 cle = CLIJ3.getInstance();
-        // ArrayJ output = cle.add_image_and_scalar(img, null, 3);
-        // cle.imshow(output);
+        CLIJ3 cle = CLIJ3.getInstance();
+        ArrayJ output = cle.gaussian_blur(img, null, 3, 0, 0);
+        cle.imshow(output);
 
-        // RandomAccessibleInterval result = cle.pullRAI(output);
-        // ij.ui().show("output", result);
+        RandomAccessibleInterval result = cle.pullRAI(output);
+        ij.ui().show("output", result);
     }
 }
