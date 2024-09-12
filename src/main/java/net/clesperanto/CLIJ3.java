@@ -1,25 +1,35 @@
 package net.clesperanto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ij.ImagePlus;
-import net.clesperanto.converters.ConverterPlugin;
-import net.clesperanto.converters.ConverterService;
-import net.clesperanto.wrapper.clesperantoj.ProcessorJ;
-import net.clesperanto.wrapper.clesperantoj.BufferJ;
-import net.clesperanto.wrapper.clesperantoj.MemoryJ;
-import net.clesperanto.wrapper.kernelj.Tier1;
+
+import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryJ;
+import net.clesperanto.core.BackendJ;
+import net.clesperanto.core.ArrayJ;
+
+import net.clesperanto.kernels.*;
+
+import net.clesperanto.imglib2.ImgLib2Converters;
+import net.clesperanto.imagej.ImageJConverters;
+
 import net.imglib2.RandomAccessibleInterval;
-import org.scijava.Context;
+
 
 public class CLIJ3 {
 
-    ProcessorJ processor;
+    DeviceJ device;
 
     @Deprecated
     public CLIJ3() {
-        processor = new ProcessorJ();
+        BackendJ.setBackend("opencl");
+        device = DeviceJ.getDefaultDevice();
     }
 
     private static CLIJ3 instance = null;
+
     public static CLIJ3 getInstance() {
         if (instance == null) {
             instance = new CLIJ3();
@@ -28,12 +38,12 @@ public class CLIJ3 {
     }
 
     @Deprecated
-    public ProcessorJ getProcessor() {
-        return processor;
+    public DeviceJ getDevice() {
+        return device;
     }
 
-    public BufferJ push(Object image) {
-        return convert(image, BufferJ.class);
+    public ArrayJ push(Object image) {
+        return convert(image, ArrayJ.class);
     }
 
     public ImagePlus pull(Object image) {
@@ -44,9 +54,6 @@ public class CLIJ3 {
         return convert(image, RandomAccessibleInterval.class);
     }
 
-
-    private ConverterService converterService = null;
-
     public <S, T> T convert(S source, Class<T> targetClass) {
         if (source == null) {
             return null;
@@ -55,57 +62,108 @@ public class CLIJ3 {
             return (T) source;
         }
         synchronized (this) {
-            //try {
-                if (converterService == null) {
-                    converterService = new Context(ConverterService.class).service(ConverterService.class);
-                }
-            //} catch (RuntimeException e) {
-            //    converterService = FallBackCLIJConverterService.getInstance();
-            //}
-            converterService.setCLE(this);
-            ConverterPlugin<S, T> converter = (ConverterPlugin<S, T>) converterService.getConverter(source.getClass(), targetClass);
-            converter.setCLE(this);
-            T result = converter.convert(source);
-
-            return  result;
+            // if source is an ImagePlus and targetClass is ArrayJ
+            if (source instanceof ImagePlus && targetClass == ArrayJ.class) {
+                return (T) ImageJConverters.copyImagePlus2ToArrayJ((ImagePlus) source, device, "buffer");
+            }
+            // if source is an ImgLib2 Img<> and targetClass is ArrayJ
+            if (source instanceof RandomAccessibleInterval && targetClass == ArrayJ.class) {
+                return (T) ImgLib2Converters.copyImgLib2ToArrayJ((RandomAccessibleInterval) source, device, "buffer");
+            }
+            // if source is an ArrayJ and targetClass is ImagePlus
+            if (source instanceof ArrayJ && targetClass == ImagePlus.class) {
+                return (T) ImageJConverters.copyArrayJToImagePlus((ArrayJ) source);
+            }
+            if (source instanceof ArrayJ && targetClass == RandomAccessibleInterval.class) {
+                return (T) ImgLib2Converters.copyArrayJToImgLib2((ArrayJ) source);
+            }
+            // throw an exception if conversion is not possible
+            throw new IllegalArgumentException(
+                    "Conversion from " + source.getClass() + " to " + targetClass + " is not supported.");
         }
     }
 
     public void imshow(Object gpu_image) {
         ImagePlus image = pull(gpu_image);
+        image.resetDisplayRange();
         image.show();
     }
 
-    public BufferJ create(long width, long height, long depth) {
-        return MemoryJ.makeFloatBuffer(this.processor, width, height, depth, "buffer");
+    public ArrayJ create(long width, long height, long depth) {
+        return MemoryJ.makeFloatBuffer(this.device, new long[] { width, height, depth }, "buffer");
     }
 
-
-    public BufferJ create_like(BufferJ source) {
-        return MemoryJ.makeFloatBuffer(this.processor, source.getWidth(), source.getHeight(), source.getDepth(), "buffer");
-    }
-
-    private BufferJ create_like_if_none(Object source, Object target) {
-        BufferJ sourceJ = push(source); // that might be not necessary and slow
-        BufferJ targetJ = push(target); // that might be not necessary and slow
-        if (targetJ != null) {
-            return targetJ;
+    public ArrayJ create(long width, long height, long depth, String data_type) {
+        switch (data_type) {
+            case "float":
+                return MemoryJ.makeFloatBuffer(this.device, new long[] { width, height, depth }, "buffer");
+            case "int":
+                return MemoryJ.makeIntBuffer(this.device, new long[] { width, height, depth }, "buffer");
+            case "short":
+                return MemoryJ.makeShortBuffer(this.device, new long[] { width, height, depth }, "buffer");
+            case "char":
+                return MemoryJ.makeByteBuffer(this.device, new long[] { width, height, depth }, "buffer");
+            case "uint":
+                return MemoryJ.makeUIntBuffer(this.device, new long[] { width, height, depth }, "buffer");
+            case "ushort":
+                return MemoryJ.makeUShortBuffer(this.device, new long[] { width, height, depth }, "buffer");
+            case "uchar":
+                return MemoryJ.makeUByteBuffer(this.device, new long[] { width, height, depth }, "buffer");    
+            default:
+                throw new IllegalArgumentException("Data type " + data_type + " not supported.");
         }
-        return create_like(sourceJ);
     }
 
-    public BufferJ add_image_and_scalar(Object source, Object target, float scalar) {
-        BufferJ sourceJ = push(source);
-        BufferJ targetJ = create_like_if_none(sourceJ, target);
-        Tier1.addImageAndScalar(processor, sourceJ, targetJ, scalar);
-
-        return targetJ;
+    public ArrayJ create_like(ArrayJ source) {
+        String data_type = source.getDataType();
+        switch (data_type) {
+            case "float":
+                return MemoryJ.makeFloatBuffer(this.device, source.getDimensions(), "buffer");
+            case "int":
+                return MemoryJ.makeIntBuffer(this.device, source.getDimensions(), "buffer");
+            case "short":
+                return MemoryJ.makeShortBuffer(this.device, source.getDimensions(), "buffer");
+            case "char":
+                return MemoryJ.makeByteBuffer(this.device, source.getDimensions(), "buffer");
+            case "uint":
+                return MemoryJ.makeUIntBuffer(this.device, source.getDimensions(), "buffer");
+            case "ushort":
+                return MemoryJ.makeUShortBuffer(this.device, source.getDimensions(), "buffer");
+            case "uchar":
+                return MemoryJ.makeUByteBuffer(this.device, source.getDimensions(), "buffer");    
+            default:
+                throw new IllegalArgumentException("Data type " + data_type + " not supported.");
+        }
     }
 
-    public BufferJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
-        BufferJ sourceJ = push(source);
-        BufferJ targetJ = create_like_if_none(sourceJ, target);
-        Tier1.gaussianBlur(processor, sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
-        return targetJ;
+    public ArrayJ create_like(ImagePlus source) {
+        Map<Integer, String> bit_depth_map = new HashMap<>();
+        bit_depth_map.put(8, "uchar");
+        bit_depth_map.put(16, "ushort");
+        bit_depth_map.put(32, "float");
+        String data_type = bit_depth_map.get(source.getBitDepth());
+        return this.create(source.getWidth(), source.getHeight(), source.getNSlices(), data_type);
+    }
+
+    /* FUNCTIONS */
+
+    public ArrayJ add_image_and_scalar(Object source, Object target, float scalar) {
+        return Tier1.addImageAndScalar(device, push(source), (ArrayJ) target, scalar);
+    }
+
+    public ArrayJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
+        return Tier1.gaussianBlur(device, push(source), (ArrayJ) target, sigma_x, sigma_y, sigma_z);
+    }
+
+    public ArrayJ absolute(Object source, Object target) {
+        return Tier1.absolute(device, push(source), (ArrayJ) target);
+    }
+
+    public ArrayJ threshold_otsu(Object source, Object target) {
+        return Tier4.thresholdOtsu(device, push(source), (ArrayJ) target);
+    }
+
+    public ArrayJ connected_components_labeling(Object source, Object target) {
+        return Tier5.connectedComponentsLabeling(device, push(source), (ArrayJ) target, "box");
     }
 }
