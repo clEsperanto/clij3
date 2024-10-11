@@ -16,11 +16,10 @@ public class YetAnotherPlayground {
         imp.show();
 
         CLIJ3 cle = CLIJ3.getInstance();
-        
+
         ArrayJ blurred = cle.gaussian_blur(imp, null, 10, 0, 0);
         ArrayJ binary = cle.threshold_otsu(blurred, null);
-        ArrayJ labels = cle.connected_components_labeling(binary, null);
-
+        ArrayJ labels = cle.connected_components_labeling(binary, null, "box");
 
         cle.imshow(labels);
     }
