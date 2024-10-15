@@ -185,6 +185,7 @@ public class CLIJ3 {
 
     /* BEGIN AUTO-GENERATED FUNCTIONS */
 
+
     public ArrayJ absolute(Object input, Object output) {
         return Tier1.absolute(device, push(input), push(output));
     }
@@ -253,8 +254,7 @@ public class CLIJ3 {
         return Tier1.copyVerticalSlice(device, push(input), push(output), slice);
     }
 
-    public ArrayJ crop(Object input, Object output, int start_x, int start_y, int start_z, int width, int height,
-            int depth) {
+    public ArrayJ crop(Object input, Object output, int start_x, int start_y, int start_z, int width, int height, int depth) {
         return Tier1.crop(device, push(input), push(output), start_x, start_y, start_z, width, height, depth);
     }
 
@@ -350,10 +350,8 @@ public class CLIJ3 {
         return Tier1.greaterOrEqualConstant(device, push(input), push(output), scalar);
     }
 
-    public ArrayList<ArrayJ> hessian_eigenvalues(Object input, Object small_eigenvalue, Object middle_eigenvalue,
-            Object large_eigenvalue) {
-        return Tier1.hessianEigenvalues(device, push(input), push(small_eigenvalue), push(middle_eigenvalue),
-                push(large_eigenvalue));
+    public ArrayList<ArrayJ> hessian_eigenvalues(Object input, Object small_eigenvalue, Object middle_eigenvalue, Object large_eigenvalue) {
+        return Tier1.hessianEigenvalues(device, push(input), push(small_eigenvalue), push(middle_eigenvalue), push(large_eigenvalue));
     }
 
     public ArrayJ laplace_box(Object input, Object output) {
@@ -564,10 +562,8 @@ public class CLIJ3 {
         return Tier1.powerImages(device, push(input0), push(input1), push(output));
     }
 
-    public ArrayJ range(Object input, Object output, int start_x, int stop_x, int step_x, int start_y, int stop_y,
-            int step_y, int start_z, int stop_z, int step_z) {
-        return Tier1.range(device, push(input), push(output), start_x, stop_x, step_x, start_y, stop_y, step_y, start_z,
-                stop_z, step_z);
+    public ArrayJ range(Object input, Object output, int start_x, int stop_x, int step_x, int start_y, int stop_y, int step_y, int start_z, int stop_z, int step_z) {
+        return Tier1.range(device, push(input), push(output), start_x, stop_x, step_x, start_y, stop_y, step_y, start_z, stop_z, step_z);
     }
 
     public ArrayJ read_values_from_positions(Object input, Object list, Object output) {
@@ -580,6 +576,14 @@ public class CLIJ3 {
 
     public ArrayJ replace_value(Object input, Object output, float scalar0, float scalar1) {
         return Tier1.replaceValue(device, push(input), push(output), scalar0, scalar1);
+    }
+
+    public ArrayJ replace_intensity(Object input, Object output, float scalar0, float scalar1) {
+        return Tier1.replaceIntensity(device, push(input), push(output), scalar0, scalar1);
+    }
+
+    public ArrayJ replace_intensities(Object input0, Object input1, Object output) {
+        return Tier1.replaceIntensities(device, push(input0), push(input1), push(output));
     }
 
     public ArrayJ maximum_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
@@ -770,8 +774,7 @@ public class CLIJ3 {
         return Tier2.bottomHatSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ bottom_hat(Object input, Object output, float radius_x, float radius_y, float radius_z,
-            String connectivity) {
+    public ArrayJ bottom_hat(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier2.bottomHat(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -811,8 +814,7 @@ public class CLIJ3 {
         return Tier2.cropBorder(device, push(input), push(output), border_size);
     }
 
-    public ArrayJ divide_by_gaussian_background(Object input, Object output, float sigma_x, float sigma_y,
-            float sigma_z) {
+    public ArrayJ divide_by_gaussian_background(Object input, Object output, float sigma_x, float sigma_y, float sigma_z) {
         return Tier2.divideByGaussianBackground(device, push(input), push(output), sigma_x, sigma_y, sigma_z);
     }
 
@@ -824,8 +826,7 @@ public class CLIJ3 {
         return Tier2.detectMaximaBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ detect_maxima(Object input, Object output, int radius_x, int radius_y, int radius_z,
-            String connectivity) {
+    public ArrayJ detect_maxima(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
         return Tier2.detectMaxima(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -833,15 +834,12 @@ public class CLIJ3 {
         return Tier2.detectMinimaBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ detect_minima(Object input, Object output, int radius_x, int radius_y, int radius_z,
-            String connectivity) {
+    public ArrayJ detect_minima(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
         return Tier2.detectMinima(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
-    public ArrayJ difference_of_gaussian(Object input, Object output, float sigma1_x, float sigma1_y, float sigma1_z,
-            float sigma2_x, float sigma2_y, float sigma2_z) {
-        return Tier2.differenceOfGaussian(device, push(input), push(output), sigma1_x, sigma1_y, sigma1_z, sigma2_x,
-                sigma2_y, sigma2_z);
+    public ArrayJ difference_of_gaussian(Object input, Object output, float sigma1_x, float sigma1_y, float sigma1_z, float sigma2_x, float sigma2_y, float sigma2_z) {
+        return Tier2.differenceOfGaussian(device, push(input), push(output), sigma1_x, sigma1_y, sigma1_z, sigma2_x, sigma2_y, sigma2_z);
     }
 
     public ArrayJ extend_labeling_via_voronoi(Object input, Object output) {
@@ -880,8 +878,7 @@ public class CLIJ3 {
         return Tier2.openingSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ opening(Object input, Object output, float radius_x, float radius_y, float radius_z,
-            String connectivity) {
+    public ArrayJ opening(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier2.opening(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -913,18 +910,24 @@ public class CLIJ3 {
         return Tier2.standardDeviationSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ standard_deviation(Object input, Object output, int radius_x, int radius_y, int radius_z,
-            String connectivity) {
+    public ArrayJ standard_deviation(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
         return Tier2.standardDeviation(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
-    public ArrayJ subtract_gaussian_background(Object input, Object output, float sigma_x, float sigma_y,
-            float sigma_z) {
+    public ArrayJ subtract_gaussian_background(Object input, Object output, float sigma_x, float sigma_y, float sigma_z) {
         return Tier2.subtractGaussianBackground(device, push(input), push(output), sigma_x, sigma_y, sigma_z);
     }
 
     public ArrayJ subtract_images(Object input0, Object input1, Object output) {
         return Tier2.subtractImages(device, push(input0), push(input1), push(output));
+    }
+
+    public ArrayJ sub_stack(Object input, Object output, int start_z, int end_z) {
+        return Tier2.subStack(device, push(input), push(output), start_z, end_z);
+    }
+
+    public ArrayJ reduce_stack(Object input, Object output, int reduction_factor, int offset) {
+        return Tier2.reduceStack(device, push(input), push(output), reduction_factor, offset);
     }
 
     public float sum_of_all_pixels(Object input) {
@@ -939,8 +942,7 @@ public class CLIJ3 {
         return Tier2.topHatSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ top_hat(Object input, Object output, float radius_x, float radius_y, float radius_z,
-            String connectivity) {
+    public ArrayJ top_hat(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier2.topHat(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -952,12 +954,19 @@ public class CLIJ3 {
         return Tier3.centerOfMass(device, push(input));
     }
 
+    public ArrayJ remove_labels(Object input, Object list, Object output) {
+        return Tier3.removeLabels(device, push(input), push(list), push(output));
+    }
+
     public ArrayJ exclude_labels(Object input, Object list, Object output) {
         return Tier3.excludeLabels(device, push(input), push(list), push(output));
     }
 
-    public ArrayJ exclude_labels_on_edges(Object input, Object output, boolean exclude_x, boolean exclude_y,
-            boolean exclude_z) {
+    public ArrayJ remove_labels_on_edges(Object input, Object output, boolean exclude_x, boolean exclude_y, boolean exclude_z) {
+        return Tier3.removeLabelsOnEdges(device, push(input), push(output), exclude_x, exclude_y, exclude_z);
+    }
+
+    public ArrayJ exclude_labels_on_edges(Object input, Object output, boolean exclude_x, boolean exclude_y, boolean exclude_z) {
         return Tier3.excludeLabelsOnEdges(device, push(input), push(output), exclude_x, exclude_y, exclude_z);
     }
 
@@ -1001,13 +1010,16 @@ public class CLIJ3 {
         return Tier3.minimumPosition(device, push(input));
     }
 
-    public ArrayJ morphological_chan_vese(Object input, Object output, int num_iter, int smoothing, float lambda1,
-            float lambda2) {
+    public ArrayJ morphological_chan_vese(Object input, Object output, int num_iter, int smoothing, float lambda1, float lambda2) {
         return Tier3.morphologicalChanVese(device, push(input), push(output), num_iter, smoothing, lambda1, lambda2);
     }
 
-    public HashMap<String, ArrayList<Float>> statistics_of_labelled_pixels(Object input, Object intensity) {
-        return Tier3.statisticsOfLabelledPixels(device, push(input), push(intensity));
+    public HashMap<String, ArrayList<Float>> statistics_of_labelled_pixels(Object label, Object intensity) {
+        return Tier3.statisticsOfLabelledPixels(device, push(label), push(intensity));
+    }
+
+    public HashMap<String, ArrayList<Float>> statistics_of_background_and_labelled_pixels(Object label, Object intensity) {
+        return Tier3.statisticsOfBackgroundAndLabelledPixels(device, push(label), push(intensity));
     }
 
     public ArrayList<Float> label_bounding_box(Object input, int label_id) {
@@ -1030,6 +1042,38 @@ public class CLIJ3 {
         return Tier4.thresholdOtsu(device, push(input), push(output));
     }
 
+    public ArrayJ pixel_count_map(Object input, Object output) {
+        return Tier4.pixelCountMap(device, push(input), push(output));
+    }
+
+    public ArrayJ label_pixel_count_map(Object input, Object output) {
+        return Tier4.labelPixelCountMap(device, push(input), push(output));
+    }
+
+    public ArrayJ centroids_of_labels(Object input, Object output, boolean withBG) {
+        return Tier4.centroidsOfLabels(device, push(input), push(output), withBG);
+    }
+
+    public ArrayJ remove_labels_with_map_values_out_of_range(Object input, Object values, Object output, float min_value, float max_value) {
+        return Tier4.removeLabelsWithMapValuesOutOfRange(device, push(input), push(values), push(output), min_value, max_value);
+    }
+
+    public ArrayJ remove_labels_with_map_values_within_range(Object input, Object values, Object output, float min_value, float max_value) {
+        return Tier4.removeLabelsWithMapValuesWithinRange(device, push(input), push(values), push(output), min_value, max_value);
+    }
+
+    public ArrayJ exclude_labels_with_map_values_out_of_range(Object input, Object values, Object output, float min_value_range, float max_value_range) {
+        return Tier4.excludeLabelsWithMapValuesOutOfRange(device, push(input), push(values), push(output), min_value_range, max_value_range);
+    }
+
+    public ArrayJ exclude_labels_with_map_values_within_range(Object input, Object values, Object output, float min_value_range, float max_value_range) {
+        return Tier4.excludeLabelsWithMapValuesWithinRange(device, push(input), push(values), push(output), min_value_range, max_value_range);
+    }
+
+    public ArrayJ extension_ratio_map(Object input, Object output) {
+        return Tier4.extensionRatioMap(device, push(input), push(output));
+    }
+
     public boolean array_equal(Object input0, Object input1) {
         return Tier5.arrayEqual(device, push(input0), push(input1));
     }
@@ -1040,6 +1084,22 @@ public class CLIJ3 {
 
     public ArrayJ connected_components_labeling(Object input, Object output, String connectivity) {
         return Tier5.connectedComponentsLabeling(device, push(input), push(output), connectivity);
+    }
+
+    public ArrayJ connected_component_labeling(Object input, Object output, String connectivity) {
+        return Tier5.connectedComponentLabeling(device, push(input), push(output), connectivity);
+    }
+
+    public ArrayJ reduce_labels_to_centroids(Object input, Object output) {
+        return Tier5.reduceLabelsToCentroids(device, push(input), push(output));
+    }
+
+    public ArrayJ filter_label_by_size(Object input, Object output, float minimum_size, float maximum_size) {
+        return Tier5.filterLabelBySize(device, push(input), push(output), minimum_size, maximum_size);
+    }
+
+    public ArrayJ exclude_labels_outside_size_range(Object input, Object output, float minimum_size, float maximum_size) {
+        return Tier5.excludeLabelsOutsideSizeRange(device, push(input), push(output), minimum_size, maximum_size);
     }
 
     public ArrayJ dilate_labels(Object input, Object output, int radius) {
@@ -1062,8 +1122,23 @@ public class CLIJ3 {
         return Tier6.voronoiLabeling(device, push(input), push(output));
     }
 
-    public ArrayJ affine_transform(Object input, Object output, ArrayList<Float> transform_matrix, boolean interpolate,
-            boolean resize) {
+    public ArrayJ remove_small_labels(Object input, Object output, float minimum_size) {
+        return Tier6.removeSmallLabels(device, push(input), push(output), minimum_size);
+    }
+
+    public ArrayJ exclude_small_labels(Object input, Object output, float maximum_size) {
+        return Tier6.excludeSmallLabels(device, push(input), push(output), maximum_size);
+    }
+
+    public ArrayJ remove_large_labels(Object input, Object output, float maximum_size) {
+        return Tier6.removeLargeLabels(device, push(input), push(output), maximum_size);
+    }
+
+    public ArrayJ exclude_large_labels(Object input, Object output, float minimum_size) {
+        return Tier6.excludeLargeLabels(device, push(input), push(output), minimum_size);
+    }
+
+    public ArrayJ affine_transform(Object input, Object output, ArrayList<Float> transform_matrix, boolean interpolate, boolean resize) {
         return Tier7.affineTransform(device, push(input), push(output), transform_matrix, interpolate, resize);
     }
 
@@ -1071,26 +1146,19 @@ public class CLIJ3 {
         return Tier7.erodedOtsuLabeling(device, push(input), push(output), number_of_erosions, outline_sigma);
     }
 
-    public ArrayJ rigid_transform(Object input, Object output, float translate_x, float translate_y, float translate_z,
-            float angle_x, float angle_y, float angle_z, boolean centered, boolean interpolate, boolean resize) {
-        return Tier7.rigidTransform(device, push(input), push(output), translate_x, translate_y, translate_z, angle_x,
-                angle_y, angle_z, centered, interpolate, resize);
+    public ArrayJ rigid_transform(Object input, Object output, float translate_x, float translate_y, float translate_z, float angle_x, float angle_y, float angle_z, boolean centered, boolean interpolate, boolean resize) {
+        return Tier7.rigidTransform(device, push(input), push(output), translate_x, translate_y, translate_z, angle_x, angle_y, angle_z, centered, interpolate, resize);
     }
 
-    public ArrayJ rotate(Object input, Object output, float angle_x, float angle_y, float angle_z, boolean centered,
-            boolean interpolate, boolean resize) {
-        return Tier7.rotate(device, push(input), push(output), angle_x, angle_y, angle_z, centered, interpolate,
-                resize);
+    public ArrayJ rotate(Object input, Object output, float angle_x, float angle_y, float angle_z, boolean centered, boolean interpolate, boolean resize) {
+        return Tier7.rotate(device, push(input), push(output), angle_x, angle_y, angle_z, centered, interpolate, resize);
     }
 
-    public ArrayJ scale(Object input, Object output, float factor_x, float factor_y, float factor_z, boolean centered,
-            boolean interpolate, boolean resize) {
-        return Tier7.scale(device, push(input), push(output), factor_x, factor_y, factor_z, centered, interpolate,
-                resize);
+    public ArrayJ scale(Object input, Object output, float factor_x, float factor_y, float factor_z, boolean centered, boolean interpolate, boolean resize) {
+        return Tier7.scale(device, push(input), push(output), factor_x, factor_y, factor_z, centered, interpolate, resize);
     }
 
-    public ArrayJ translate(Object input, Object output, float translate_x, float translate_y, float translate_z,
-            boolean interpolate) {
+    public ArrayJ translate(Object input, Object output, float translate_x, float translate_y, float translate_z, boolean interpolate) {
         return Tier7.translate(device, push(input), push(output), translate_x, translate_y, translate_z, interpolate);
     }
 
@@ -1118,6 +1186,6 @@ public class CLIJ3 {
         return Tier8.smoothConnectedLabels(device, push(input), push(output), radius);
     }
 
-    /* END AUTO-GENERATED FUNCTIONS */
+ /* END AUTO-GENERATED FUNCTIONS */
 
 }
