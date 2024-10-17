@@ -50,7 +50,7 @@ public class CLIJ3 {
         return convert(image, ImagePlus.class);
     }
 
-    public RandomAccessibleInterval pullRAI(Object image) {
+    public RandomAccessibleInterval<?> pullRAI(Object image) {
         return convert(image, RandomAccessibleInterval.class);
     }
 
@@ -64,13 +64,11 @@ public class CLIJ3 {
         synchronized (this) {
             // if source is an ImagePlus and targetClass is ArrayJ
             if (source instanceof ImagePlus && targetClass == ArrayJ.class) {
-
                 return (T) ImageJConverters.copyImagePlus2ToArrayJ((ImagePlus) source, device, MemoryType.BUFFER);
             }
             // if source is an ImgLib2 Img<> and targetClass is ArrayJ
             if (source instanceof RandomAccessibleInterval && targetClass == ArrayJ.class) {
-                return (T) ImgLib2Converters.copyImgLib2ToArrayJ((RandomAccessibleInterval) source, device,
-                        MemoryType.BUFFER);
+                return (T) ImgLib2Converters.copyImgLib2ToArrayJ((RandomAccessibleInterval) source, device, MemoryType.BUFFER);
             }
             // if source is an ArrayJ and targetClass is ImagePlus
             if (source instanceof ArrayJ && targetClass == ImagePlus.class) {
@@ -86,89 +84,53 @@ public class CLIJ3 {
     }
 
     public void imshow(Object gpu_image) {
-        ImagePlus image = pull(gpu_image);
+        ImagePlus image = this.pull(gpu_image);
         image.resetDisplayRange();
         image.show();
     }
 
     public ArrayJ create(long width, long height, long depth) {
-        return device.createArray(DataType.FLOAT32, MemoryType.BUFFER,
-                new long[] { width, height, depth });
-        // return MemoryJ.makeFloatBuffer(this.device, new long[] { width, height, depth
-        // }, "buffer");
+        return device.createArray(DataType.FLOAT32, MemoryType.BUFFER, new long[] { width, height, depth });
     }
 
     public ArrayJ create(long width, long height, long depth, String data_type) {
         switch (data_type) {
             case "float":
                 return device.createArray(DataType.FLOAT32, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeFloatBuffer(this.device, new long[] { width, height, depth
-            // }, "buffer");
             case "int":
                 return device.createArray(DataType.INT32, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeIntBuffer(this.device, new long[] { width, height, depth
-            // }, "buffer");
             case "short":
                 return device.createArray(DataType.INT16, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeShortBuffer(this.device, new long[] { width, height, depth
-            // }, "buffer");
             case "char":
                 return device.createArray(DataType.INT8, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeByteBuffer(this.device, new long[] { width, height, depth
-            // }, "buffer");
             case "uint":
                 return device.createArray(DataType.UINT32, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeUIntBuffer(this.device, new long[] { width, height, depth
-            // }, "buffer");
             case "ushort":
                 return device.createArray(DataType.UINT16, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeUShortBuffer(this.device, new long[] { width, height,
-            // depth }, "buffer");
             case "uchar":
                 return device.createArray(DataType.UINT8, MemoryType.BUFFER, new long[] { width, height, depth });
-            // return MemoryJ.makeUByteBuffer(this.device, new long[] { width, height, depth
-            // }, "buffer");
             default:
                 throw new IllegalArgumentException("Data type " + data_type + " not supported.");
         }
     }
 
     public ArrayJ create_like(ArrayJ source) {
-        // source.dataType()
         DataType data_type = source.dataType();
         switch (data_type) {
             case FLOAT32:
-                return device.createArray(data_type, source.memoryType(),
-                        new long[] { source.width(), source.height(), source.depth() });
-            // return MemoryJ.makeFloatBuffer(this.device, source.getDimensions(),
-            // "buffer");
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
             case INT32:
-                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(),
-                        source.depth() });
-            // return MemoryJ.makeIntBuffer(this.device, source.getDimensions(), "buffer");
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
             case INT16:
-                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(),
-                        source.depth() });
-            // return MemoryJ.makeShortBuffer(this.device, source.getDimensions(),
-            // "buffer");
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
             case INT8:
-                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(),
-                        source.depth() });
-            // return MemoryJ.makeByteBuffer(this.device, source.getDimensions(), "buffer");
-            case UINT32:
-                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(),
-                        source.depth() });
-            // return MemoryJ.makeUIntBuffer(this.device, source.getDimensions(), "buffer");
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
+            case UINT32: 
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
             case UINT16:
-                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(),
-                        source.depth() });
-            // return MemoryJ.makeUShortBuffer(this.device, source.getDimensions(),
-            // "buffer");
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
             case UINT8:
-                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(),
-                        source.depth() });
-            // return MemoryJ.makeUByteBuffer(this.device, source.getDimensions(),
-            // "buffer");
+                return device.createArray(data_type, source.memoryType(), new long[] { source.width(), source.height(), source.depth() });
             default:
                 throw new IllegalArgumentException("Data type " + data_type + " not supported.");
         }

@@ -22,5 +22,19 @@ public class YetAnotherPlayground {
         ArrayJ labels = cle.connected_components_labeling(binary, null, "box");
 
         cle.imshow(labels);
+        ImagePlus result = cle.pull(labels);
+
+        // now print information about the result in ImageJ console
+        IJ.log("ImagePlus object: " + result);
+        IJ.log("Image dimensions: " + result.getWidth() + "x" + result.getHeight() + "x" + result.getNSlices());
+        IJ.log("Image type: " + result.getType());
+        IJ.log("Image title: " + result.getTitle());
+
+
+        // now print information about the result in ImageJ console
+        IJ.log("ArrayJ object: " + labels);
+        IJ.log("ArrayJ dimensions: " + labels.width() + "x" + labels.height() + "x" + labels.depth());
+        IJ.log("ArrayJ type: " + labels.dataType());
+        
     }
 }
