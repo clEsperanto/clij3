@@ -4,7 +4,7 @@ from net.clesperanto import CLIJ3
 
 cle = CLIJ3.getInstance()
 
-imp = IJ.openImage("http://imagej.nih.gov/ij/images/blobs.gif");
+imp = IJ.openImage("/data/clesperanto/clij3/demo/blobs.tif")
 imp.show()
 
 gpu_image = cle.push(imp)
