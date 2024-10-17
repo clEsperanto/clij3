@@ -89,6 +89,7 @@
 		<!-- <scijava.app.directory>/home/strigaud/Libraries/Fiji.app</scijava.app.directory>
 		<scijava.app.directory>/home/rhaase/programs/fiji/Fiji.app/</scijava.app.directory>
 		<scijava.app.directory>/Applications/Fiji.app/</scijava.app.directory> -->
+		<scijava.app.directory>C:/programs/fiji-win64/Fiji.app/</scijava.app.directory>
 	</properties>
 
 	<dependencies>
