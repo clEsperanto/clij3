@@ -152,8 +152,8 @@ public class CLIJ3 {
         return Tier1.absolute(device, push(input), push(output));
     }
 
-    public ArrayJ add_images_weighted(Object input0, Object input1, Object output, float factor0, float factor1) {
-        return Tier1.addImagesWeighted(device, push(input0), push(input1), push(output), factor0, factor1);
+    public ArrayJ add_images_weighted(Object input0, Object input1, Object output, float factor1, float factor2) {
+        return Tier1.addImagesWeighted(device, push(input0), push(input1), push(output), factor1, factor2);
     }
 
     public ArrayJ add_image_and_scalar(Object input, Object output, float scalar) {
@@ -204,16 +204,16 @@ public class CLIJ3 {
         return Tier1.copy(device, push(input), push(output));
     }
 
-    public ArrayJ copy_slice(Object input, Object output, int slice) {
-        return Tier1.copySlice(device, push(input), push(output), slice);
+    public ArrayJ copy_slice(Object input, Object output, int slice_index) {
+        return Tier1.copySlice(device, push(input), push(output), slice_index);
     }
 
-    public ArrayJ copy_horizontal_slice(Object input, Object output, int slice) {
-        return Tier1.copyHorizontalSlice(device, push(input), push(output), slice);
+    public ArrayJ copy_horizontal_slice(Object input, Object output, int slice_index) {
+        return Tier1.copyHorizontalSlice(device, push(input), push(output), slice_index);
     }
 
-    public ArrayJ copy_vertical_slice(Object input, Object output, int slice) {
-        return Tier1.copyVerticalSlice(device, push(input), push(output), slice);
+    public ArrayJ copy_vertical_slice(Object input, Object output, int slice_index) {
+        return Tier1.copyVerticalSlice(device, push(input), push(output), slice_index);
     }
 
     public ArrayJ crop(Object input, Object output, int start_x, int start_y, int start_z, int width, int height, int depth) {
@@ -228,6 +228,10 @@ public class CLIJ3 {
         return Tier1.detectLabelEdges(device, push(input), push(output));
     }
 
+    public ArrayJ dilation(Object input, Object footprint, Object output) {
+        return Tier1.dilation(device, push(input), push(footprint), push(output));
+    }
+
     public ArrayJ dilate_box(Object input, Object output) {
         return Tier1.dilateBox(device, push(input), push(output));
     }
@@ -236,12 +240,12 @@ public class CLIJ3 {
         return Tier1.dilateSphere(device, push(input), push(output));
     }
 
-    public ArrayJ dilate(Object input, Object output, String connectivity) {
-        return Tier1.dilate(device, push(input), push(output), connectivity);
+    public ArrayJ binary_dilate(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.binaryDilate(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
-    public ArrayJ divide_images(Object input0, Object input1, Object output) {
-        return Tier1.divideImages(device, push(input0), push(input1), push(output));
+    public ArrayJ divide_images(Object dividend, Object divisor, Object output) {
+        return Tier1.divideImages(device, push(dividend), push(divisor), push(output));
     }
 
     public ArrayJ divide_scalar_by_image(Object input, Object output, float scalar) {
@@ -256,6 +260,10 @@ public class CLIJ3 {
         return Tier1.equalConstant(device, push(input), push(output), scalar);
     }
 
+    public ArrayJ erosion(Object input, Object footprint, Object output) {
+        return Tier1.erosion(device, push(input), push(footprint), push(output));
+    }
+
     public ArrayJ erode_box(Object input, Object output) {
         return Tier1.erodeBox(device, push(input), push(output));
     }
@@ -264,8 +272,8 @@ public class CLIJ3 {
         return Tier1.erodeSphere(device, push(input), push(output));
     }
 
-    public ArrayJ erode(Object input, Object output, String connectivity) {
-        return Tier1.erode(device, push(input), push(output), connectivity);
+    public ArrayJ binary_erode(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.binaryErode(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ exponential(Object input, Object output) {
@@ -280,8 +288,8 @@ public class CLIJ3 {
         return Tier1.gaussianBlur(device, push(input), push(output), sigma_x, sigma_y, sigma_z);
     }
 
-    public ArrayJ generate_distance_matrix(Object input0, Object input1, Object output) {
-        return Tier1.generateDistanceMatrix(device, push(input0), push(input1), push(output));
+    public ArrayJ generate_distance_matrix(Object coordinate_list1, Object coordinate_list2, Object distance_matrix_destination) {
+        return Tier1.generateDistanceMatrix(device, push(coordinate_list1), push(coordinate_list2), push(distance_matrix_destination));
     }
 
     public ArrayJ gradient_x(Object input, Object output) {
@@ -328,8 +336,8 @@ public class CLIJ3 {
         return Tier1.laplace(device, push(input), push(output), connectivity);
     }
 
-    public ArrayJ local_cross_correlation(Object input0, Object input1, Object output) {
-        return Tier1.localCrossCorrelation(device, push(input0), push(input1), push(output));
+    public ArrayJ local_cross_correlation(Object input, Object kernel, Object output) {
+        return Tier1.localCrossCorrelation(device, push(input), push(kernel), push(output));
     }
 
     public ArrayJ logarithm(Object input, Object output) {
@@ -352,12 +360,16 @@ public class CLIJ3 {
         return Tier1.maximumImages(device, push(input0), push(input1), push(output));
     }
 
-    public ArrayJ maximum_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ maximum_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.maximumBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ maximum(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
-        return Tier1.maximum(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    public ArrayJ maximum_filter(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.maximumFilter(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    }
+
+    public ArrayJ grayscale_dilate(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.grayscaleDilate(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ maximum_x_projection(Object input, Object output) {
@@ -372,16 +384,16 @@ public class CLIJ3 {
         return Tier1.maximumZProjection(device, push(input), push(output));
     }
 
-    public ArrayJ mean_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ mean_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.meanBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ mean_sphere(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ mean_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.meanSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ mean(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
-        return Tier1.mean(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    public ArrayJ mean_filter(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.meanFilter(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ mean_x_projection(Object input, Object output) {
@@ -396,24 +408,28 @@ public class CLIJ3 {
         return Tier1.meanZProjection(device, push(input), push(output));
     }
 
-    public ArrayJ median_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ median_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.medianBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ median_sphere(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ median_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.medianSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ median(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public ArrayJ median(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier1.median(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
-    public ArrayJ minimum_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ minimum_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.minimumBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ minimum(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
-        return Tier1.minimum(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    public ArrayJ minimum_filter(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.minimumFilter(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    }
+
+    public ArrayJ grayscale_erode(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.grayscaleErode(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ minimum_image_and_scalar(Object input, Object output, float scalar) {
@@ -436,15 +452,15 @@ public class CLIJ3 {
         return Tier1.minimumZProjection(device, push(input), push(output));
     }
 
-    public ArrayJ mode_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ mode_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.modeBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ mode_sphere(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ mode_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.modeSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ mode(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public ArrayJ mode(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier1.mode(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -500,20 +516,20 @@ public class CLIJ3 {
         return Tier1.notEqualConstant(device, push(input), push(output), scalar);
     }
 
-    public ArrayJ paste(Object input, Object output, int index_x, int index_y, int index_z) {
-        return Tier1.paste(device, push(input), push(output), index_x, index_y, index_z);
+    public ArrayJ paste(Object input, Object output, int destination_x, int destination_y, int destination_z) {
+        return Tier1.paste(device, push(input), push(output), destination_x, destination_y, destination_z);
     }
 
-    public ArrayJ onlyzero_overwrite_maximum_box(Object input, Object output0, Object output1) {
-        return Tier1.onlyzeroOverwriteMaximumBox(device, push(input), push(output0), push(output1));
+    public ArrayJ onlyzero_overwrite_maximum_box(Object input, Object flag, Object output) {
+        return Tier1.onlyzeroOverwriteMaximumBox(device, push(input), push(flag), push(output));
     }
 
-    public ArrayJ onlyzero_overwrite_maximum_diamond(Object input, Object output0, Object output1) {
-        return Tier1.onlyzeroOverwriteMaximumDiamond(device, push(input), push(output0), push(output1));
+    public ArrayJ onlyzero_overwrite_maximum_diamond(Object input, Object flag, Object output) {
+        return Tier1.onlyzeroOverwriteMaximumDiamond(device, push(input), push(flag), push(output));
     }
 
-    public ArrayJ onlyzero_overwrite_maximum(Object input, Object output0, Object output1, String connectivity) {
-        return Tier1.onlyzeroOverwriteMaximum(device, push(input), push(output0), push(output1), connectivity);
+    public ArrayJ onlyzero_overwrite_maximum(Object input, Object flag, Object output, String connectivity) {
+        return Tier1.onlyzeroOverwriteMaximum(device, push(input), push(flag), push(output), connectivity);
     }
 
     public ArrayJ power(Object input, Object output, float scalar) {
@@ -536,12 +552,12 @@ public class CLIJ3 {
         return Tier1.replaceValues(device, push(input0), push(input1), push(output));
     }
 
-    public ArrayJ replace_value(Object input, Object output, float scalar0, float scalar1) {
-        return Tier1.replaceValue(device, push(input), push(output), scalar0, scalar1);
+    public ArrayJ replace_value(Object input, Object output, float value_to_replace, float value_replacement) {
+        return Tier1.replaceValue(device, push(input), push(output), value_to_replace, value_replacement);
     }
 
-    public ArrayJ replace_intensity(Object input, Object output, float scalar0, float scalar1) {
-        return Tier1.replaceIntensity(device, push(input), push(output), scalar0, scalar1);
+    public ArrayJ replace_intensity(Object input, Object output, float value_to_replace, float value_replacement) {
+        return Tier1.replaceIntensity(device, push(input), push(output), value_to_replace, value_replacement);
     }
 
     public ArrayJ replace_intensities(Object input0, Object input1, Object output) {
@@ -556,8 +572,8 @@ public class CLIJ3 {
         return Tier1.minimumSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ multiply_matrix(Object input0, Object input1, Object output) {
-        return Tier1.multiplyMatrix(device, push(input0), push(input1), push(output));
+    public ArrayJ multiply_matrix(Object matrix1, Object matrix2, Object matrix_destination) {
+        return Tier1.multiplyMatrix(device, push(matrix1), push(matrix2), push(matrix_destination));
     }
 
     public ArrayJ reciprocal(Object input, Object output) {
@@ -568,16 +584,16 @@ public class CLIJ3 {
         return Tier1.set(device, push(input), scalar);
     }
 
-    public ArrayJ set_column(Object input, int column, float value) {
-        return Tier1.setColumn(device, push(input), column, value);
+    public ArrayJ set_column(Object input, int column_index, float value) {
+        return Tier1.setColumn(device, push(input), column_index, value);
     }
 
     public ArrayJ set_image_borders(Object input, float value) {
         return Tier1.setImageBorders(device, push(input), value);
     }
 
-    public ArrayJ set_plane(Object input, int plane, float value) {
-        return Tier1.setPlane(device, push(input), plane, value);
+    public ArrayJ set_plane(Object input, int plane_index, float value) {
+        return Tier1.setPlane(device, push(input), plane_index, value);
     }
 
     public ArrayJ set_ramp_x(Object input) {
@@ -592,8 +608,8 @@ public class CLIJ3 {
         return Tier1.setRampZ(device, push(input));
     }
 
-    public ArrayJ set_row(Object input, int row, float value) {
-        return Tier1.setRow(device, push(input), row, value);
+    public ArrayJ set_row(Object input, int row_index, float value) {
+        return Tier1.setRow(device, push(input), row_index, value);
     }
 
     public ArrayJ set_nonzero_pixels_to_pixelindex(Object input, Object output, int offset) {
@@ -680,16 +696,16 @@ public class CLIJ3 {
         return Tier1.undefinedToZero(device, push(input), push(output));
     }
 
-    public ArrayJ variance_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ variance_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.varianceBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ variance_sphere(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ variance_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier1.varianceSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ variance(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
-        return Tier1.variance(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    public ArrayJ variance_filter(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier1.varianceFilter(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ write_values_to_positions(Object input, Object output) {
@@ -728,7 +744,7 @@ public class CLIJ3 {
         return Tier2.addImages(device, push(input0), push(input1), push(output));
     }
 
-    public ArrayJ bottom_hat_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ bottom_hat_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.bottomHatBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
@@ -748,12 +764,20 @@ public class CLIJ3 {
         return Tier2.closingBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ closing_sphere(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ closing_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.closingSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ closing(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
-        return Tier2.closing(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    public ArrayJ grayscale_closing(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier2.grayscaleClosing(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    }
+
+    public ArrayJ closing(Object input, Object footprint, Object output) {
+        return Tier2.closing(device, push(input), push(footprint), push(output));
+    }
+
+    public ArrayJ binary_closing(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier2.binaryClosing(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ concatenate_along_x(Object input0, Object input1, Object output) {
@@ -768,8 +792,8 @@ public class CLIJ3 {
         return Tier2.concatenateAlongZ(device, push(input0), push(input1), push(output));
     }
 
-    public ArrayJ count_touching_neighbors(Object input, Object output, boolean ignore_background) {
-        return Tier2.countTouchingNeighbors(device, push(input), push(output), ignore_background);
+    public ArrayJ count_touching_neighbors(Object touch_matrix, Object touching_neighbors_count_destination, boolean ignore_background) {
+        return Tier2.countTouchingNeighbors(device, push(touch_matrix), push(touching_neighbors_count_destination), ignore_background);
     }
 
     public ArrayJ crop_border(Object input, Object output, int border_size) {
@@ -784,19 +808,19 @@ public class CLIJ3 {
         return Tier2.degreesToRadians(device, push(input), push(output));
     }
 
-    public ArrayJ detect_maxima_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ detect_maxima_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.detectMaximaBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ detect_maxima(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public ArrayJ detect_maxima(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier2.detectMaxima(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
-    public ArrayJ detect_minima_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ detect_minima_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.detectMinimaBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ detect_minima(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public ArrayJ detect_minima(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier2.detectMinima(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -832,7 +856,7 @@ public class CLIJ3 {
         return Tier2.minimumOfMaskedPixels(device, push(input), push(mask));
     }
 
-    public ArrayJ opening_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ opening_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.openingBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
@@ -840,8 +864,16 @@ public class CLIJ3 {
         return Tier2.openingSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ opening(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
-        return Tier2.opening(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    public ArrayJ grayscale_opening(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier2.grayscaleOpening(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
+    }
+
+    public ArrayJ opening(Object input, Object footprint, Object output) {
+        return Tier2.opening(device, push(input), push(footprint), push(output));
+    }
+
+    public ArrayJ binary_opening(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        return Tier2.binaryOpening(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
     public ArrayJ radians_to_degrees(Object input, Object output) {
@@ -864,15 +896,15 @@ public class CLIJ3 {
         return Tier2.squaredDifference(device, push(input0), push(input1), push(output));
     }
 
-    public ArrayJ standard_deviation_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ standard_deviation_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.standardDeviationBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ standard_deviation_sphere(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ standard_deviation_sphere(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.standardDeviationSphere(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
-    public ArrayJ standard_deviation(Object input, Object output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public ArrayJ standard_deviation(Object input, Object output, float radius_x, float radius_y, float radius_z, String connectivity) {
         return Tier2.standardDeviation(device, push(input), push(output), radius_x, radius_y, radius_z, connectivity);
     }
 
@@ -896,7 +928,7 @@ public class CLIJ3 {
         return Tier2.sumOfAllPixels(device, push(input));
     }
 
-    public ArrayJ top_hat_box(Object input, Object output, int radius_x, int radius_y, int radius_z) {
+    public ArrayJ top_hat_box(Object input, Object output, float radius_x, float radius_y, float radius_z) {
         return Tier2.topHatBox(device, push(input), push(output), radius_x, radius_y, radius_z);
     }
 
@@ -948,16 +980,16 @@ public class CLIJ3 {
         return Tier3.generateTouchMatrix(device, push(input), push(output));
     }
 
-    public ArrayJ histogram(Object input, Object output, int nbins, float min, float max) {
-        return Tier3.histogram(device, push(input), push(output), nbins, min, max);
+    public ArrayJ histogram(Object input, Object output, int num_bins, float minimum_intensity, float maximum_intensity) {
+        return Tier3.histogram(device, push(input), push(output), num_bins, minimum_intensity, maximum_intensity);
     }
 
     public float jaccard_index(Object input0, Object input1) {
         return Tier3.jaccardIndex(device, push(input0), push(input1));
     }
 
-    public ArrayJ labelled_spots_to_pointlist(Object input, Object output) {
-        return Tier3.labelledSpotsToPointlist(device, push(input), push(output));
+    public ArrayJ labelled_spots_to_pointlist(Object label, Object pointlist) {
+        return Tier3.labelledSpotsToPointlist(device, push(label), push(pointlist));
     }
 
     public ArrayList<Float> maximum_position(Object input) {
@@ -976,12 +1008,12 @@ public class CLIJ3 {
         return Tier3.morphologicalChanVese(device, push(input), push(output), num_iter, smoothing, lambda1, lambda2);
     }
 
-    public HashMap<String, ArrayList<Float>> statistics_of_labelled_pixels(Object label, Object intensity) {
-        return Tier3.statisticsOfLabelledPixels(device, push(label), push(intensity));
+    public HashMap<String, ArrayList<Float>> statistics_of_labelled_pixels(Object intensity, Object label) {
+        return Tier3.statisticsOfLabelledPixels(device, push(intensity), push(label));
     }
 
-    public HashMap<String, ArrayList<Float>> statistics_of_background_and_labelled_pixels(Object label, Object intensity) {
-        return Tier3.statisticsOfBackgroundAndLabelledPixels(device, push(label), push(intensity));
+    public HashMap<String, ArrayList<Float>> statistics_of_background_and_labelled_pixels(Object intensity, Object label) {
+        return Tier3.statisticsOfBackgroundAndLabelledPixels(device, push(intensity), push(label));
     }
 
     public ArrayList<Float> label_bounding_box(Object input, int label_id) {
@@ -1004,6 +1036,10 @@ public class CLIJ3 {
         return Tier4.thresholdOtsu(device, push(input), push(output));
     }
 
+    public ArrayJ mean_intensity_map(Object input, Object labels, Object output) {
+        return Tier4.meanIntensityMap(device, push(input), push(labels), push(output));
+    }
+
     public ArrayJ pixel_count_map(Object input, Object output) {
         return Tier4.pixelCountMap(device, push(input), push(output));
     }
@@ -1012,8 +1048,8 @@ public class CLIJ3 {
         return Tier4.labelPixelCountMap(device, push(input), push(output));
     }
 
-    public ArrayJ centroids_of_labels(Object input, Object output, boolean withBG) {
-        return Tier4.centroidsOfLabels(device, push(input), push(output), withBG);
+    public ArrayJ centroids_of_labels(Object label_image, Object centroids_coordinates, boolean include_background) {
+        return Tier4.centroidsOfLabels(device, push(label_image), push(centroids_coordinates), include_background);
     }
 
     public ArrayJ remove_labels_with_map_values_out_of_range(Object input, Object values, Object output, float min_value, float max_value) {
@@ -1024,12 +1060,12 @@ public class CLIJ3 {
         return Tier4.removeLabelsWithMapValuesWithinRange(device, push(input), push(values), push(output), min_value, max_value);
     }
 
-    public ArrayJ exclude_labels_with_map_values_out_of_range(Object input, Object values, Object output, float min_value_range, float max_value_range) {
-        return Tier4.excludeLabelsWithMapValuesOutOfRange(device, push(input), push(values), push(output), min_value_range, max_value_range);
+    public ArrayJ exclude_labels_with_map_values_out_of_range(Object values_map, Object label_map_input, Object output, float minimum_value_range, float maximum_value_range) {
+        return Tier4.excludeLabelsWithMapValuesOutOfRange(device, push(values_map), push(label_map_input), push(output), minimum_value_range, maximum_value_range);
     }
 
-    public ArrayJ exclude_labels_with_map_values_within_range(Object input, Object values, Object output, float min_value_range, float max_value_range) {
-        return Tier4.excludeLabelsWithMapValuesWithinRange(device, push(input), push(values), push(output), min_value_range, max_value_range);
+    public ArrayJ exclude_labels_with_map_values_within_range(Object values_map, Object label_map_input, Object output, float minimum_value_range, float maximum_value_range) {
+        return Tier4.excludeLabelsWithMapValuesWithinRange(device, push(values_map), push(label_map_input), push(output), minimum_value_range, maximum_value_range);
     }
 
     public ArrayJ extension_ratio_map(Object input, Object output) {
@@ -1080,8 +1116,8 @@ public class CLIJ3 {
         return Tier6.maskedVoronoiLabeling(device, push(input), push(mask), push(output));
     }
 
-    public ArrayJ voronoi_labeling(Object input, Object output) {
-        return Tier6.voronoiLabeling(device, push(input), push(output));
+    public ArrayJ voronoi_labeling(Object input_binary, Object output_labels) {
+        return Tier6.voronoiLabeling(device, push(input_binary), push(output_labels));
     }
 
     public ArrayJ remove_small_labels(Object input, Object output, float minimum_size) {
