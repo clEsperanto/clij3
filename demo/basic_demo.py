@@ -9,9 +9,11 @@ imp.show()
 
 gpu_image = cle.push(imp)
 
-gpu_result = cle.gaussian_blur(gpu_image, None, 5, 5, 5)
+blurred = cle.gaussian_blur(gpu_image, None, 1, 1, 1)
+binary = cle.threshold_otsu(blurred, None)
+labelled = cle.connected_component_labeling(binary, None, "box")
 
-imp_res = cle.pull(gpu_result)
+imp_res = cle.pull(labelled)
 imp_res.show()
 
 
