@@ -9,6 +9,7 @@ native/build
 /.idea/
 *.iml
 CLIJ*.txt
+*.app
 
 # temporary files
 *.log

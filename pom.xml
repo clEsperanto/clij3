@@ -13,7 +13,7 @@
 	</parent>
 
 	<groupId>net.clesperanto</groupId>
-	<artifactId>clij3_</artifactId>
+	<artifactId>clij3</artifactId>
 	<version>0.16.8-SNAPSHOT</version>
 
 	<name>clij3</name>
@@ -86,7 +86,7 @@
 		<package-name>net.clesperanto</package-name>
 		<license.licenseName>bsd_3</license.licenseName>
 		<license.copyrightOwners>Robert Haase, Stéphane Rigaud, Institut Pasteur Paris, DFG Cluster of Excellence "Physice of Life" TU Dresden</license.copyrightOwners>
-		<!-- <scijava.app.directory>/home/strigaud/Libraries/Fiji-clij3/Fiji.app</scijava.app.directory> -->
+		<scijava.app.directory>/data/clesperanto/clij3/Fiji_deploy.app</scijava.app.directory>
 		<!-- <scijava.app.directory>/Users/strigaud/Libraries/fiji_clij/Fiji.app</scijava.app.directory> -->
 		<!-- <scijava.app.directory>/home/rhaase/programs/fiji/Fiji.app/</scijava.app.directory> -->
 	</properties>
@@ -137,7 +137,7 @@
 		<dependency>
 			<groupId>net.clesperanto</groupId>
 			<artifactId>clesperantoj</artifactId>
-			<version>0.16.8</version>
+			<version>0.16.9-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
