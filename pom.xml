@@ -14,7 +14,7 @@
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clij3</artifactId>
-	<version>0.16.8-SNAPSHOT</version>
+	<version>0.16.9-SNAPSHOT</version>
 
 	<name>clij3</name>
 	<description>clij3</description>
@@ -137,7 +137,7 @@
 		<dependency>
 			<groupId>net.clesperanto</groupId>
 			<artifactId>clesperantoj</artifactId>
-			<version>0.16.9-SNAPSHOT</version>
+			<version>0.16.9</version>
 		</dependency>
 
 	</dependencies>
