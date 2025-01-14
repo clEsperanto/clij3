@@ -50,7 +50,7 @@ import net.clesperanto.imagej.ImageJConverters;
 
 import net.imglib2.RandomAccessibleInterval;
 
-public class CLIJ3 {
+public class CLIJ3 implements CLIJ3Ops{
 
     DeviceJ device;
 
@@ -178,7 +178,7 @@ public class CLIJ3 {
     }
 
     /* BEGIN AUTO-GENERATED FUNCTIONS */
-
+ /*
 
     public ArrayJ absolute(Object input, Object output) {
         return Tier1.absolute(device, push(input), push(output));
@@ -1215,7 +1215,8 @@ public class CLIJ3 {
     public ArrayJ smooth_connected_labels(Object input, Object output, int radius) {
         return Tier8.smoothConnectedLabels(device, push(input), push(output), radius);
     }
-
+    
+*/
  /* END AUTO-GENERATED FUNCTIONS */
 
 }
