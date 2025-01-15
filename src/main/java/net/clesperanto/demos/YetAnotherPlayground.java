@@ -30,7 +30,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
-package net.clesperanto.test;
+package net.clesperanto.demos;
 
 import ij.IJ;
 import ij.ImageJ;

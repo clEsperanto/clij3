@@ -30,34 +30,33 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
-package net.clesperanto.test;
+
+
+import ij.IJ;
+import ij.ImageJ;
+import ij.ImagePlus;
 
 import net.clesperanto.CLIJ3;
 import net.clesperanto.core.ArrayJ;
 
-import net.imagej.Dataset;
-import net.imagej.ImageJ;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.Img;
-import net.imglib2.type.numeric.real.FloatType;
+import org.junit.Test;
 
-public class YetAnotherPlaygroundImgLib2 {
+public class ImagePlusFijiTest {
 
-    final static net.imagej.ImageJ ij = new ImageJ();
+    @Test
+    public void ImagePlusTest() throws Exception {
 
-    public static void main(String[] args) throws Exception {
-        ij.launch(args);
-
-        Dataset dataset = (Dataset) ij.io().open("./demo/boats.tif");
-
-        Img<FloatType> img = ij.op().convert().float32((Img) dataset);
-        ij.ui().show("input", img);
+        ImagePlus imp = IJ.openImage("./demo/blobs.tif");
 
         CLIJ3 cle = CLIJ3.getInstance();
-        ArrayJ output = cle.gaussian_blur(img, null, 3, 0, 0);
-        cle.imshow(output);
 
-        RandomAccessibleInterval result = cle.pullRAI(output);
-        ij.ui().show("output", result);
+        ArrayJ blurred = cle.gaussian_blur(imp, null, 10, 0, 0);
+        ArrayJ binary = cle.threshold_otsu(blurred, null);
+        ArrayJ labels = cle.connected_components_labeling(binary, null, "box");
+        float nbLabels = cle.maximum_of_all_pixels(labels);
+
+        ImagePlus result = cle.pull(labels);
+        
+        assert(nbLabels == 27.0);
     }
 }
