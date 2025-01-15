@@ -50,11 +50,11 @@ public class YetAnotherPlayground {
         CLIJ3 cle = CLIJ3.getInstance();
 
         ArrayJ blurred = cle.gaussian_blur(imp, null, 10, 0, 0);
-        // ArrayJ binary = cle.threshold_otsu(blurred, null);
-        // ArrayJ labels = cle.connected_components_labeling(binary, null, "box");
+        ArrayJ binary = cle.threshold_otsu(blurred, null);
+        ArrayJ labels = cle.connected_components_labeling(binary, null, "box");
 
-        cle.imshow(blurred);
-        ImagePlus result = cle.pull(blurred);
+        cle.imshow(labels);
+        ImagePlus result = cle.pull(labels);
 
         // now print information about the result in ImageJ console
         IJ.log("ImagePlus object: " + result);
@@ -64,9 +64,9 @@ public class YetAnotherPlayground {
 
 
         // now print information about the result in ImageJ console
-        // IJ.log("ArrayJ object: " + labels);
-        // IJ.log("ArrayJ dimensions: " + labels.width() + "x" + labels.height() + "x" + labels.depth());
-        // IJ.log("ArrayJ type: " + labels.dataType());
+        IJ.log("ArrayJ object: " + labels);
+        IJ.log("ArrayJ dimensions: " + labels.width() + "x" + labels.height() + "x" + labels.depth());
+        IJ.log("ArrayJ type: " + labels.dataType());
         
     }
 }
