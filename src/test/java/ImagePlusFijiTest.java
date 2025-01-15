@@ -46,8 +46,6 @@ public class ImagePlusFijiTest {
     @Test
     public void ImagePlusTest() throws Exception {
 
-        new ImageJ(ImageJ.NO_SHOW);
-
         ImagePlus imp = IJ.openImage("./demo/blobs.tif");
 
         CLIJ3 cle = CLIJ3.getInstance();
@@ -60,6 +58,5 @@ public class ImagePlusFijiTest {
         ImagePlus result = cle.pull(labels);
         
         assert(nbLabels == 27.0);
-        IJ.getInstance().quit();
     }
 }
