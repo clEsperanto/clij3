@@ -4,6 +4,7 @@ from net.clesperanto import CLIJ3
 
 cle = CLIJ3.getInstance()
 
+# Update the path to the image before running the script
 imp = IJ.openImage("/data/clesperanto/clij3/demo/blobs.tif")
 imp.show()
 
