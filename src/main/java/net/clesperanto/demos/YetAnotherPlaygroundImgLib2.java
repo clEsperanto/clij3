@@ -43,7 +43,7 @@ import net.imglib2.type.numeric.real.FloatType;
 
 public class YetAnotherPlaygroundImgLib2 {
 
-     final static net.imagej.ImageJ ij = new ImageJ();
+    final static net.imagej.ImageJ ij = new ImageJ();
 
     public static void main(String[] args) throws Exception {
         ij.launch(args);
