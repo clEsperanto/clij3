@@ -25,4 +25,4 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: mvn -Ptest --batch-mode --update-snapshots verify
+        run: mvn test --batch-mode --update-snapshots verify
