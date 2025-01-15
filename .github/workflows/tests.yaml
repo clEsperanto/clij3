@@ -1,4 +1,4 @@
-name: Build
+name: Tests
 
 on:
   push:
@@ -11,9 +11,9 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        java: [8]
-        os: [macos-13]
-        
+        java: [8, 11, 17, 21]
+        os: [macos-13] # only runner with native OCL device support
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -27,7 +27,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
+      - name: Run tests
         run: |
-          mvn clean install -U -DskipTests
+          mvn clean test -X
         shell: bash -l {0}
